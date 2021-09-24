@@ -1,0 +1,26 @@
+<div class="container">
+<table>
+    <tr>
+    <td>
+        <p class="display-3">Filters:</p>
+    </td>
+
+    <td>
+        <div class='container border'>
+    <p>On days:</p>
+    <input type="date" [(ngModel)]="days_start" (change)="updateResults()">
+    <br>to<br>
+    <input type="date" [(ngModel)]="days_end" (change)="updateResults()">
+</div>
+</td>
+
+<td>    <div class='container border'>
+    <p>On Hours:</p>
+    <input type="time" [(ngModel)]="hours_start" (change)="updateResults()">
+    <br>to<br>
+    <input type="time" [(ngModel)]="hours_end" (change)="updateResults()">
+</div>
+</td>
+</tr>
+</table>
+</div>
