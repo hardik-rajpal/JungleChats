@@ -12,6 +12,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.2.0",
+    "@angular/cdk": "^12.2.7",
     "@angular/common": "~12.2.0",
     "@angular/compiler": "~12.2.0",
     "@angular/core": "~12.2.0",
@@ -19,7 +20,10 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@swimlane/ngx-charts": "^19.0.1",
     "angular-google-charts": "^2.2.2",
+    "chart.js": "^3.5.1",
+    "ng2-charts": "^2.4.3",
     "ngx-chips": "^2.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

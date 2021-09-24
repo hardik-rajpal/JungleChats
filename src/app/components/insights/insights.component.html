@@ -1,6 +1,19 @@
 <div class="container">
     <p class="display-4">Insights</p>
+    <div class="chart container border">
+    <app-mylinechart [data]="linechartdata"
+                    [xAxisLabel]="viewfreq_xlabel"
+                    [yAxisLabel]="viewfreq_ylabel"
+                    [mytitle] = "viewfreq_title"
+                    ></app-mylinechart>
+    </div>
+    <div class="chart container border">
+        <app-mylinechart [data]="daytimedata"
+                        [xAxisLabel]="daytime_xlabel"
+                        [yAxisLabel]="daytime_ylabel"
+                        [mytitle] = "daytime_title"
+        ></app-mylinechart>
+    </div>
     <app-table [rows]="rows" [title]="title"></app-table>
-    {{viewfreqs}}
-    
+
 </div>

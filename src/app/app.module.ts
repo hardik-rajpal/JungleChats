@@ -9,11 +9,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { TagInputModule } from 'ngx-chips';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { TagGroupComponent } from './components/tag-group/tag-group.component';
 import { TogglerButtonComponent } from './components/toggler-button/toggler-button.component';
 import { InsightsComponent } from './components/insights/insights.component';
-import { TableComponent } from './components/table/table.component'
-
+import { TableComponent } from './components/table/table.component';
+import { MylinechartComponent } from './components/mylinechart/mylinechart.component'
 // import {For} from '@angular/forms';
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { TableComponent } from './components/table/table.component'
     TagGroupComponent,
     TogglerButtonComponent,
     InsightsComponent,
-    TableComponent
+    TableComponent,
+    MylinechartComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { TableComponent } from './components/table/table.component'
     ReactiveFormsModule,
     TagInputModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
