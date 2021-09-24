@@ -27,43 +27,58 @@ export class InsightsComponent implements OnInit {
   ntomonth = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
   temp:any
   strpmi(mi:number):string{
-    console.log(mi)
+
     this.temp = this.ntomonth[Math.round(12*(mi - Math.floor(mi)))]
     return this.temp + "20" + String(Math.floor(mi))
   }
+  processviewFreqs(viewfreqs:any){
+    this.linechartdata = []
+    console.log(viewfreqs)
+    for(let key of Object.keys(viewfreqs)){
+      this.linechartdata.push({"name":key,
+        "series":[]
+    })
+    for(let i=0;i<viewfreqs[key][0][0].length;i++){
+      this.monthData.push([viewfreqs[key][0][0][i],viewfreqs[key][0][1][i]])
+    }
+    console.log(this.monthData)
+    for(let i=0;i<this.monthData.length;i++){
+      this.linechartdata[this.linechartdata.length - 1]["series"].push({"name":this.strpmi(this.monthData[i][0]), "value": this.monthData[i][1]})
+    }
+  }
+}
+  processdaytime(daytime:any){
+    for(let key of Object.keys(daytime)){
+      this.daytimedata.push({"name":key,
+        "series":[]
+    })
+      for(let i=0;i<daytime[key].length;i++){
+        this.temp = daytime[key][i];
+        this.daytimedata[this.daytimedata.length-1]["series"].push({"name": String(i), "value":this.temp})
+      }
+    
+    }
+  }
+  updateDataLoop(){
+    this.data = this.dataService.getSharedData()
+    this.rows = this.data['TopNVideos'];
+    this.viewfreqs = this.data['viewfreq'];
+    this.processviewFreqs(this.viewfreqs)
+    this.daytimedata = []
+    this.processdaytime(this.data['daytime'])
+    setTimeout(()=>{
+      this.updateDataLoop()
+    }, 5000)
+  }
   ngOnInit(): void {
-    this.dataService.getData().subscribe((data)=>{
-      this.data = JSON.parse(data);
-      this.rows = this.data.User1.TopNVideos;
-      this.viewfreqs = this.data.User1.viewFreq;
-      for(let i=0;i<this.viewfreqs[0][0].length;i++){
-        this.monthData.push([this.viewfreqs[0][0][i],this.viewfreqs[0][1][i]])
-      }
-      this.linechartdata = [
-        {
-          "name": "Videos",
-          "series": []
-        }  ]
-      for(let i=0;i<this.monthData.length;i++){
-        // console.log("hi")
-        this.linechartdata[0]["series"].push({"name":this.strpmi(this.monthData[i][0]), "value": this.monthData[i][1]})
-      }
-      this.daytimedata = []
-      for(let key of Object.keys(this.data.User1.daytime)){
-        this.daytimedata.push({"name":key,
-          "series":[]
-      })
-        for(let i=0;i<this.data.User1.daytime[key].length;i++){
-          this.temp = this.data.User1.daytime[key][i];
-          this.daytimedata[this.daytimedata.length-1]["series"].push({"name": String(i), "value":this.temp})
-        }
-      
-      }
-      console.log(this.daytimedata)
+      this.dataService.getData()
+      setTimeout(()=>{
+        this.updateDataLoop()
+      }, 3000)
+
       // for(let key of Array.from(Object.keys(this.data.User1.daytime))){
       //   console.log(key)
       // }
-    })
   }
 
 }
