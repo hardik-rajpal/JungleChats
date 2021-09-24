@@ -13,6 +13,7 @@ import { TagGroupComponent } from './components/tag-group/tag-group.component';
 import { TogglerButtonComponent } from './components/toggler-button/toggler-button.component';
 import { InsightsComponent } from './components/insights/insights.component';
 import { TableComponent } from './components/table/table.component'
+
 // import {For} from '@angular/forms';
 @NgModule({
   declarations: [

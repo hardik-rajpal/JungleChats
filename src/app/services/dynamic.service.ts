@@ -18,7 +18,7 @@ const httpOptions = {
 export class DataService {
   private apiUrl = "http://127.0.0.1:8000/kytube/data/"
   constructor(private http:HttpClient) { }
-  getTasks():Observable<any>{
+  getData():Observable<any>{
     return this.http.get<any>(this.apiUrl, httpOptions)  
   }
 }

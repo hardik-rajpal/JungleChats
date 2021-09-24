@@ -1,10 +1,9 @@
 <div class="container border">
     <h4 class="display-5">{{title}}</h4>
     <table>
-
     <tr *ngFor="let row of rows">
         <td *ngFor="let cell of row" class="display-5">
-            <h5>{{cell}}</h5>
+            {{cell}}
         </td>
     </tr>
 </table>

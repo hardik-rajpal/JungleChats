@@ -7,16 +7,22 @@ import { DataService } from '../../services/dynamic.service';
 })
 export class InsightsComponent implements OnInit {
   data:any
+  monthData:any
   rows:string[][] = [
     ['1', 'TS22', '24'],
     ['2', 'TS1989', '22']
   ];
+  viewfreqs:any
   title:string = "Most Watched Videos";
   constructor(private dataService:DataService) { }
 
   ngOnInit(): void {
-    this.dataService.getTasks().subscribe((data)=>{
-      this.data = data;
+    this.dataService.getData().subscribe((data)=>{
+      this.data = JSON.parse(data);
+      this.rows = this.data.User1.TopNVideos;
+      this.viewfreqs = this.data.User1.viewFreq;
+      this.monthData = this.viewfreqs[0]
+      console.log(this.data.User1)
     })
   }
 
