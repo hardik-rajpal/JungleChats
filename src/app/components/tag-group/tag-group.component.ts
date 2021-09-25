@@ -10,6 +10,7 @@ export class TagGroupComponent implements OnInit {
   @Input() gnum!:number;
   @Input() tags_list!:string[];
   @Output() onadd:EventEmitter<any> = new EventEmitter();
+  @Output() onremove:EventEmitter<any> = new EventEmitter();
   items:string[] = this.tags_list
   temp:any;
   constructor() {}
@@ -23,6 +24,8 @@ export class TagGroupComponent implements OnInit {
     this.tags_list.push(this.temp.display)
     this.onadd.emit({tag:this.temp.display, gnum:this.gnum});
     // console.log(this.tags_list);
-
+  }
+  onRemoving(){
+    this.onremove.emit(this.gnum)
   }
 }

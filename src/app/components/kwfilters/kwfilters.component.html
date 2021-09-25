@@ -11,9 +11,10 @@
 <div class="setup border" id="group_holder">
     <button (click)="addGroup()">Add Group</button>
     <span *ngFor="let group of taggroups;index as i;" >
-    <app-tag-group  [gnum]="i" [tags_list]="group" (onadd)="update($event)"></app-tag-group>
+    <app-tag-group  [gnum]="i" [tags_list]="group" (onadd)="update($event)" (onremove)="removeGroup($event)"></app-tag-group>
     </span>
 
 </div>
-<button (click)="getGroupdata()">Get Results</button>
+
+<button (click)="getGroupdata()" class="btn-results">Get<br>Results</button>
 </div>

@@ -1,5 +1,7 @@
 <div class="container">
-    <p class="display-4">Insights</p>
+    <p class="display-3">Insights</p>
+    <app-timefilters></app-timefilters>
+    <app-kwfilters (groupRequest)="sendGroupRequest($event)"></app-kwfilters>
     <div class="chart container border">
     <app-mylinechart [data]="linechartdata"
                     [xAxisLabel]="viewfreq_xlabel"

@@ -5,9 +5,16 @@
     width:70%;
     height: 200px;
     overflow-y:scroll;
-    margin-left:10%;
+    margin-left:5%;
     overflow-x: visible;
 }
 app-tag-group{
     width:20%;
+}
+.btn-results{
+    background-color: darkseagreen;
+    color: white;
+    font-size: 40px;
+    border-radius: 5px;
+    float:right;
 }

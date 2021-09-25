@@ -1,7 +1,9 @@
 import { Component, OnInit,ComponentFactoryResolver,
   ViewChild,
   ElementRef,
-  ViewContainerRef } from '@angular/core';
+  ViewContainerRef,
+  EventEmitter, 
+  Output} from '@angular/core';
 import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
 import { DataService } from '../../services/dynamic.service';
 import { InsightsComponent } from '../insights/insights.component';
@@ -11,6 +13,7 @@ import { InsightsComponent } from '../insights/insights.component';
   styleUrls: ['./kwfilters.component.css']
 })
 export class KwfiltersComponent implements OnInit {
+  @Output() groupRequest:EventEmitter<any> = new EventEmitter();
   checkTitle!:boolean;
   taggroups:string[][] = [
     ['Youtube', ''],
@@ -27,12 +30,17 @@ export class KwfiltersComponent implements OnInit {
     // const componentRef = this.container.createComponent(taggroupfactory);
     this.taggroups.push([]);
   }
+  removeGroup(gnum:number){
+    this.taggroups.splice(gnum, 1);
+    console.log(this.taggroups)
+  }
+
   getGroupdata(){
-    this.dataService.getGroupData(this.taggroups)
+    this.groupRequest.emit(this.taggroups)
   }
   update(data:any){
     this.taggroups[data.gnum].push(data.tag)
-    console.log(this.taggroups);
+    // console.log(this.taggroups);
   }
   ngOnInit(): void {
   }
