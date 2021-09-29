@@ -6,7 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { TimefiltersComponent } from './components/timefilters/timefilters.component';
 import { KwfiltersComponent } from './components/kwfilters/kwfilters.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import {AppRoutingModule} from './app-routing.module'
 import { TagInputModule } from 'ngx-chips';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -14,7 +14,9 @@ import { TagGroupComponent } from './components/tag-group/tag-group.component';
 import { TogglerButtonComponent } from './components/toggler-button/toggler-button.component';
 import { InsightsComponent } from './components/insights/insights.component';
 import { TableComponent } from './components/table/table.component';
-import { MylinechartComponent } from './components/mylinechart/mylinechart.component'
+import { MylinechartComponent } from './components/mylinechart/mylinechart.component';
+import { ResultspageComponent } from './components/resultspage/resultspage.component';
+import { SubmitpageComponent } from './components/submitpage/submitpage.component'
 // import {For} from '@angular/forms';
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { MylinechartComponent } from './components/mylinechart/mylinechart.compo
     InsightsComponent,
     TableComponent,
     MylinechartComponent,
+    ResultspageComponent,
+    SubmitpageComponent,
 
   ],
   imports: [
@@ -37,6 +41,7 @@ import { MylinechartComponent } from './components/mylinechart/mylinechart.compo
     BrowserAnimationsModule,
     HttpClientModule,
     NgxChartsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

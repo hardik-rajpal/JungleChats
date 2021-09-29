@@ -1,5 +1,6 @@
 import { Time } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild,EventEmitter } from '@angular/core';
+// import { EventEmitter } from 'stream';
 
 @Component({
   selector: 'app-timefilters',
@@ -7,19 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./timefilters.component.css']
 })
 export class TimefiltersComponent implements OnInit {
-  days_start!:Date
-  days_end!:Date
-  hours_start!:Time
-  hours_end!:Time
+  @Input() minDate!:string
+  @Input() maxDate!:string
+  @ViewChild('minDateField') mindf:any
+  @ViewChild('maxDateField') maxdf:any 
+  @Output() getFiltered:EventEmitter<any> = new EventEmitter();
+  minTime:string = '00:00:00'
+  maxTime:string = '23:59:59'
   constructor() { }
 
   ngOnInit(): void {
+    
   }
   updateResults(){
-    console.log(this.days_start);
-    console.log(this.days_end);
-    console.log(this.hours_start);
-    console.log(this.hours_end);
     //update results.
+  }
+  filter(){
+    this.getFiltered.emit([this.minDate, this.maxDate, this.minTime, this.maxTime])
   }
 }

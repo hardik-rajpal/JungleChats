@@ -8,18 +8,21 @@
     <td>
         <div class='container border'>
     <p>On days:</p>
-    <input type="date" [(ngModel)]="days_start" (change)="updateResults()">
+    <input type="date" [(ngModel)]="minDate" (change)="updateResults()">
     <br>to<br>
-    <input type="date" [(ngModel)]="days_end" (change)="updateResults()">
+    <input type="date" [(ngModel)]="maxDate" (change)="updateResults()">
 </div>
 </td>
 
 <td>    <div class='container border'>
     <p>On Hours:</p>
-    <input type="time" [(ngModel)]="hours_start" (change)="updateResults()">
+    <input type="time" [(ngModel)]="minTime" (change)="updateResults()">
     <br>to<br>
-    <input type="time" [(ngModel)]="hours_end" (change)="updateResults()">
+    <input type="time" [(ngModel)]="maxTime" (change)="updateResults()">
 </div>
+</td>
+<td>
+    <button (click)="filter()" class="btn-results">Filter</button>
 </td>
 </tr>
 </table>

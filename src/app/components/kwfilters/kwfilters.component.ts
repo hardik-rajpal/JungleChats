@@ -14,6 +14,7 @@ import { InsightsComponent } from '../insights/insights.component';
 })
 export class KwfiltersComponent implements OnInit {
   @Output() groupRequest:EventEmitter<any> = new EventEmitter();
+  @Output() updateTags:EventEmitter<any> = new EventEmitter();
   checkTitle!:boolean;
   taggroups:string[][] = [
     ['Youtube', ''],
@@ -29,10 +30,12 @@ export class KwfiltersComponent implements OnInit {
     // const taggroupfactory = this.componentFactoryResolver.resolveComponentFactory(TagGroupComponent);
     // const componentRef = this.container.createComponent(taggroupfactory);
     this.taggroups.push([]);
+    this.updateTags.emit(this.taggroups)
   }
   removeGroup(gnum:number){
     this.taggroups.splice(gnum, 1);
-    console.log(this.taggroups)
+    // console.log(this.taggroups)
+    this.updateTags.emit(this.taggroups)
   }
 
   getGroupdata(){
@@ -40,6 +43,7 @@ export class KwfiltersComponent implements OnInit {
   }
   update(data:any){
     this.taggroups[data.gnum].push(data.tag)
+    this.updateTags.emit(this.taggroups)
     // console.log(this.taggroups);
   }
   ngOnInit(): void {

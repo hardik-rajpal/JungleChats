@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../services/dynamic.service';
 import { Chart } from 'node_modules/chart.js';
 @Component({
@@ -7,8 +7,11 @@ import { Chart } from 'node_modules/chart.js';
   styleUrls: ['./insights.component.css']
 })
 export class InsightsComponent implements OnInit {
+  @ViewChild('status') statp:any;
   data:any
   monthData:any = []
+  minDate:string="2000-01-01"
+  maxDate:string="2000-01-02"
   rows:string[][] = [
     ['1', 'TS22', '24'],
     ['2', 'TS1989', '22']
@@ -27,16 +30,30 @@ export class InsightsComponent implements OnInit {
   constructor(private dataService:DataService) { }
   ntomonth = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
   temp:any
+  kwtags:any
+  updateTags(tags:any){
+    this.kwtags = tags;
+  }
   sendGroupRequest(groups:any){
-    this.dataService.getGroupData(groups).subscribe(data=>{
-        this.data = JSON.parse(data);
-        console.log(this.data)
-        console.log(this.data.viewFreq)
-        this.daytime = this.data.daytimeFreq
-        this.processdaytime(this.daytime)
-        this.viewfreqs = this.data.viewFreq
-        this.processviewFreqs(this.viewfreqs)
+    // this.updateUser("Getting tagged Data");
+    let temp = localStorage.getItem('cleanedData');
+    console.log(temp);
+    console.log(this.data)
+    if(temp!=null){
+      localStorage.setItem('cleanedData', this.data);
+    // this.getFilteredData([])//assigns filtered table to this.data
+    this.dataService.getGroupData(this.kwtags).subscribe(data=>{
+    console.log(temp)
+      if(temp!=null) {
+      data = JSON.parse(data)
+      console.log(data)
+      this.presentData(data)
+      localStorage.setItem('cleanedData', temp);
+      console.log(localStorage.getItem("cleanedData"))
+    }     
+          
     })
+  }
   }
   strpmi(mi:number):string{
 
@@ -80,27 +97,64 @@ export class InsightsComponent implements OnInit {
     // console.log(this.daytimedata)
     
   }
-  updateDataLoop(){
-    this.data = this.dataService.getSharedData()
-    this.rows = this.data['TopNVideos'];
-    this.viewfreqs = this.data['viewfreq'];
-    this.processviewFreqs(this.viewfreqs)
-    this.daytimedata = []
-    this.processdaytime(this.data['daytime'])
-    setTimeout(()=>{
-      this.updateDataLoop()
-    }, 5000)
+  getFilteredData(vals:string[]){
+    console.log(vals)
+    console.log(this.minDate, this.maxDate)
+    let dates = [vals[0], vals[1]]
+    for(let i=0;i<dates.length;i++){
+      let ymd = dates[i].split('-')
+      //y = [0]
+      //d = [2]
+      let m = this.ntomonth[(Number(ymd[1]))-1];
+      let ans = m + ' '+Number(ymd[2]).toString() + ', ' + ymd[0]
+      console.log(ans)
+      vals[i] = ans;
+    }
+    // this.updateUser("Filtering by Time");
+    this.dataService.getFilteredData(vals).subscribe(data=>{
+      this.data = data
+      this.sendGroupRequest(this.kwtags);
+    })
   }
+  presentData(data:any){
+    let extdates:string[] = data.extDates
+    for(let i=0;i<extdates.length;i++){
+      let date = extdates[i];
+      let comps = date.split(',')
+      let mi = (1+this.ntomonth.indexOf((comps[0].split(' ')[0]))).toString()
+      // console.log(mi)
+      let di = comps[0].split(' ')[1];
+      if(mi.length ==1){
+        mi  = '0'+mi
+        // console.log(mi)
+      }
+      if(di.length ==1){
+        di  = '0'+di
+        // console.log(mi)
+      }
+      date = comps[1].slice(1, comps[1].length) + '-' + mi+'-' + di
+      extdates[i] = date
+    }
+    console.log(extdates)
+    this.minDate = extdates[0]
+    this.maxDate = extdates[1]
+    this.rows = data.TopNVideos
+    this.daytime = data.daytimeFreq
+    this.processdaytime(this.daytime)
+    this.viewfreqs = data.viewFreq
+    this.processviewFreqs(this.viewfreqs)
+  }
+  // updateUser(stat:String){
+  // console.log(this.statp.nativeElement)
+    // this.statp.nativeElement.innerHTML = stat;
+  // }
   ngOnInit(): void {
+    // this.statp.nativeElement.innerHTML = "stat";
+    // this.updateUser("Getting Processed Data");
       this.dataService.getData().subscribe(data=>{
-        this.data = JSON.parse(data);
-        // console.log(this.data.User1.viewFreq)
-        this.rows = this.data.User1.TopNVideos
-        this.daytime = this.data.User1.daytimeFreq
-        this.processdaytime(this.daytime)
-        this.viewfreqs = this.data.User1.viewFreq
-        this.processviewFreqs(this.viewfreqs)
+        this.presentData(JSON.parse(data));
       })
+      this.data = localStorage.getItem('cleanedData');
   }
 
 }
