@@ -20,7 +20,7 @@ export class DataService {
   data:any;
   userId!:string;
   // private apiUrl = "http://127.0.0.1:8000/kytube/data/"
-  private apiUrl = "http://kythr.herokuapp.com/kytube/data/"
+  private apiUrl = "https://kythr.herokuapp.com/kytube/data/"
   
   constructor(private http:HttpClient) { }
   getFilteredData(vals:string[]):Observable<any>{
