@@ -1,9 +1,13 @@
-<p #status> Hi</p>
-<div class="container" #status>
-    <p class="display-3">Insights: </p>
-     
-    <app-timefilters [minDate]="minDate" [maxDate]="maxDate" (getFiltered)="getFilteredData($event)"></app-timefilters>
+<div class="container">
+    <div>
+    <span>
+    <p id="insights" class="display-3">Insights: <em id="status" class="display-6" #status> Hi</em></p>
+    <br>
+</span>
+</div>
+    
     <app-kwfilters (groupRequest)="sendGroupRequest($event)" (updateTags)="updateTags($event)"></app-kwfilters>
+    <app-timefilters [minDate]="minDate" [maxDate]="maxDate" (getFiltered)="getFilteredData($event)"></app-timefilters>
     <div class="chart container border">
     <app-mylinechart [data]="linechartdata"
                     [xAxisLabel]="viewfreq_xlabel"

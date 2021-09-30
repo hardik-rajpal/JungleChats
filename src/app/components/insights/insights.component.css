@@ -1,3 +1,9 @@
+#insights{
+    width:fit-content;
+}
+#status{
+    font-size: 15px;
+}
 .chart{
     float:left;
     margin:10px;
