@@ -16,7 +16,8 @@ import { InsightsComponent } from './components/insights/insights.component';
 import { TableComponent } from './components/table/table.component';
 import { MylinechartComponent } from './components/mylinechart/mylinechart.component';
 import { ResultspageComponent } from './components/resultspage/resultspage.component';
-import { SubmitpageComponent } from './components/submitpage/submitpage.component'
+import { SubmitpageComponent } from './components/submitpage/submitpage.component';
+import { LandingpageComponent } from './components/landingpage/landingpage.component'
 // import {For} from '@angular/forms';
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SubmitpageComponent } from './components/submitpage/submitpage.componen
     MylinechartComponent,
     ResultspageComponent,
     SubmitpageComponent,
+    LandingpageComponent,
 
   ],
   imports: [
