@@ -5,7 +5,6 @@
     <br>
 </span>
 </div>
-    
     <app-kwfilters (groupRequest)="sendGroupRequest($event)" (updateTags)="updateTags($event)"></app-kwfilters>
     <app-timefilters [minDate]="minDate" [maxDate]="maxDate" (getFiltered)="getFilteredData($event)"></app-timefilters>
     <div class="chart container border">
@@ -22,6 +21,14 @@
                         [mytitle] = "daytime_title"
         ></app-mylinechart>
     </div>
-    <app-table [rows]="rows" [title]="title"></app-table>
 
+    <div class="chart container border right">
+    
+        <app-scatterdays [bubbleData]="scatterData"></app-scatterdays>
+        
+        </div>
+    <div class="left">
+    <app-table [rows]="days" title="Most Watched Days"></app-table>
+    </div>
+    <app-table [rows]="rows" [title]="title"></app-table>    
 </div>

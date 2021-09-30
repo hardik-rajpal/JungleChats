@@ -17,7 +17,8 @@ import { TableComponent } from './components/table/table.component';
 import { MylinechartComponent } from './components/mylinechart/mylinechart.component';
 import { ResultspageComponent } from './components/resultspage/resultspage.component';
 import { SubmitpageComponent } from './components/submitpage/submitpage.component';
-import { LandingpageComponent } from './components/landingpage/landingpage.component'
+import { LandingpageComponent } from './components/landingpage/landingpage.component';
+import { ScatterdaysComponent } from './components/scatterdays/scatterdays.component'
 // import {For} from '@angular/forms';
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LandingpageComponent } from './components/landingpage/landingpage.compo
     ResultspageComponent,
     SubmitpageComponent,
     LandingpageComponent,
+    ScatterdaysComponent,
 
   ],
   imports: [

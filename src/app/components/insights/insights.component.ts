@@ -18,6 +18,8 @@ export class InsightsComponent implements AfterViewInit,OnInit {
     this.data = localStorage.getItem('cleanedData');
   }
   data:any
+  days:any[] = []
+  hours:any
   monthData:any = []
   minDate:string="2000-01-01"
   maxDate:string="2000-01-02"
@@ -25,6 +27,8 @@ export class InsightsComponent implements AfterViewInit,OnInit {
     ['1', 'TS22', '24'],
     ['2', 'TS1989', '22']
   ];
+  scatterData!:any[]
+
   viewfreqs:any
   viewfreq_xlabel = "The months gone by..."
   viewfreq_ylabel = "Number of videos/month"
@@ -71,6 +75,63 @@ export class InsightsComponent implements AfterViewInit,OnInit {
     this.temp = this.ntomonth[Math.round(12*(mi - Math.floor(mi)))]
     return this.temp + "20" + String(Math.floor(mi))
   }
+  decimaltotime(time:number){
+    return (Math.floor(time)).toString() + ":" + (60*(time - Math.floor(time))).toString()
+  }
+  processmostWatchedDays(data:any){
+    
+    for(let k=0;k<data.hours.length;k++){
+      this.days.push([k+1, data.days[k][0], data.days[k][1]]);
+    }
+    console.log(this.days)
+    
+    // this.days = data.days
+    // console.log(data.hours)
+    // console.log(data.days)
+    this.scatterData = []
+    let elems = []
+    for(let i=0;i<data.days.length;i++){
+      elems.push({
+        name:data.days[i][0],
+        x:data.days[i][0],
+        y:0,
+        r:3
+      })
+      // elems[elems.length - 1].y = 12
+    }
+    // console.log(elems)
+    // console.log(data.hours[0].length)
+    for(let i=0;i<data.hours.length;i++){
+      for(let j=0;j<data.hours[i].length;j++){
+        if(j==0){
+          elems[i].y = data.hours[i][j]
+          this.scatterData.push({
+            name:'',
+            series:[
+              elems[i]
+            ]
+          })
+        }
+        else{
+          elems[i].y = data.hours[i][j]
+          if(elems[i].y!=0){
+            this.scatterData[i].series.push({
+              name:elems[i].name,
+              x:elems[i].x,
+              y:data.hours[i][j],
+              r:elems[i].r
+            })
+  
+          }
+        }
+
+      }
+    
+    // this.hours = data.hours
+    // this.days = data.days
+    }
+    console.log(this.scatterData)
+  }
   processviewFreqs(viewfreqs:any){
     this.temp = [];
     this.linechartdata = []
@@ -90,8 +151,9 @@ export class InsightsComponent implements AfterViewInit,OnInit {
     }
 
   }
-  console.log(this.linechartdata)
+  // console.log(this.linechartdata)
 }
+
   processdaytime(daytime:any){
     this.daytimedata = []
     for(let key of Object.keys(daytime)){
@@ -109,8 +171,8 @@ export class InsightsComponent implements AfterViewInit,OnInit {
     
   }
   getFilteredData(vals:string[]){
-    console.log(vals)
-    console.log(this.minDate, this.maxDate)
+    // console.log(vals)
+    // console.log(this.minDate, this.maxDate)
     let dates = [vals[0], vals[1]]
     for(let i=0;i<dates.length;i++){
       let ymd = dates[i].split('-')
@@ -118,7 +180,7 @@ export class InsightsComponent implements AfterViewInit,OnInit {
       //d = [2]
       let m = this.ntomonth[(Number(ymd[1]))-1];
       let ans = m + ' '+Number(ymd[2]).toString() + ', ' + ymd[0]
-      console.log(ans)
+      // console.log(ans)
       vals[i] = ans;
     }
     this.updateUser("Filtering by Time", "info");
@@ -150,7 +212,7 @@ export class InsightsComponent implements AfterViewInit,OnInit {
       date = comps[1].slice(1, comps[1].length) + '-' + mi+'-' + di
       extdates[i] = date
     }
-    console.log(extdates)
+    // console.log(extdates)
     this.minDate = extdates[0]
     this.maxDate = extdates[1]
     this.rows = data.TopNVideos
@@ -158,10 +220,12 @@ export class InsightsComponent implements AfterViewInit,OnInit {
     this.processdaytime(this.daytime)
     this.viewfreqs = data.viewFreq
     this.processviewFreqs(this.viewfreqs)
+    // console.log(JSON.parse(data.topNDays).hours)
+    this.processmostWatchedDays(JSON.parse(data.topNDays))
     this.updateUser("All Done!", "success");
   }
   updateUser(stat:String, alert:String){
-  console.log(this.statp.nativeElement)
+  // console.log(this.statp.nativeElement)
     this.statp.nativeElement.innerHTML = stat;
     this.statp.nativeElement.className = "alert alert-" + alert;
   }
