@@ -14,6 +14,8 @@ export class InsightsComponent implements AfterViewInit,OnInit {
     this.statp.nativeElement.className = "alert alert-info";
     this.dataService.getData().subscribe(data=>{
       this.presentData(JSON.parse(data));
+    }, error=>{
+      this.updateUser("Request Failed. Please retry.", "danger");
     })
     this.data = localStorage.getItem('cleanedData');
   }
@@ -67,6 +69,8 @@ export class InsightsComponent implements AfterViewInit,OnInit {
       // console.log(localStorage.getItem("cleanedData"))
     }     
           
+    }, error=>{
+      this.updateUser("Request Failed. Please retry.", "danger");
     })
   }
   }
@@ -188,7 +192,7 @@ export class InsightsComponent implements AfterViewInit,OnInit {
       this.data = data
       this.sendGroupRequest(this.kwtags);
     }, error=>{
-      this.updateUser("Request Failed.", "danger");
+      this.updateUser("Request Failed. Please retry.", "danger");
     })
   }
   presentData(data:any){
