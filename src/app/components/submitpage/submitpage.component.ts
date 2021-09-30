@@ -59,13 +59,13 @@ export class SubmitpageComponent implements OnInit {
         // console.log(this.raw_instances[i])
       }
       this.progress = 100*Math.min(1, i/len);
-      this.updateUser("Cleaning: ");
+      this.updateUser("Cleaning: ", "info");
     }
     let temparr = []
     this.progress = 0;
     for(let i=0;i<this.raw_instances.length;i++){
       if(i%65==0){this.progress = 100*Math.min(1, i/len);
-      this.updateUser("Formatting: ");}
+      this.updateUser("Formatting: ", "info");}
       if(this.raw_instances[i]=='None'){
         continue
       }
@@ -88,7 +88,9 @@ export class SubmitpageComponent implements OnInit {
       }
       let channel = segs[4].slice(0, segs[4].length-3)
       let link_vid = segs[0].slice(7, segs[0].length-1)
+      link_vid = "";
       let link_chan = segs[3].slice(9, segs[3].length - 1)
+      link_chan = "";
       let date = segs[6].slice(0, segs[6].length-5) 
       if(date.endsWith('--cap')){
         this.raw_instances[i] = 'None'
@@ -100,14 +102,14 @@ export class SubmitpageComponent implements OnInit {
     let charset = '123456789ABCDEF';
     let userId = this.randomString(16,charset);
     this.progress = 0;
-    this.updateUser("Processing: ");
+    this.updateUser("Processing: ", "info");
     this.dataservice.sendUserData(this.raw_instances, userId).subscribe(data=>{
       let stat = 0;
           // console.log(data)
         localStorage.setItem('cleanedData',data)
         this.progress = 100;
-        this.updateUser("Processing: ");
-        this.updateUser("Redirecting to Results:")
+        this.updateUser("Processing: ", "success");
+        this.updateUser("Redirecting to Results:", "success")
         setTimeout(()=>{
           this._router.navigate(["/results"], {relativeTo:this._activatedRoute});
         }, 1500)
@@ -120,11 +122,12 @@ export class SubmitpageComponent implements OnInit {
   check(){
     console.log(this.raw_instances[1])
   }
-  updateUser(func:String){
+  updateUser(func:String, alert:String){
     this.statp.nativeElement.innerHTML = func + this.progress.toString() + "% done";
+    this.statp.nativeElement.className = "alert alert-" + alert;
   }
   submit(){
-    this.updateUser("Cleaning: ");
+    this.updateUser("Cleaning: ", "info");
     this.fr.onload = (e)=>{
       if(!this.fr.result){
         return;

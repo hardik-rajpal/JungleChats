@@ -1,13 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { DataService } from '../../services/dynamic.service';
 import { Chart } from 'node_modules/chart.js';
+import { AfterViewInit } from '@angular/core';
 @Component({
   selector: 'app-insights',
   templateUrl: './insights.component.html',
   styleUrls: ['./insights.component.css']
 })
-export class InsightsComponent implements OnInit {
-  @ViewChild('status') statp:any;
+export class InsightsComponent implements AfterViewInit,OnInit {
+  @ViewChild('status') statp!:ElementRef;
+  ngAfterViewInit(){
+    this.statp.nativeElement.innerHTML = "Receiving Processed Data...";
+    this.statp.nativeElement.className = "alert alert-info";
+    this.dataService.getData().subscribe(data=>{
+      this.presentData(JSON.parse(data));
+    })
+    this.data = localStorage.getItem('cleanedData');
+  }
   data:any
   monthData:any = []
   minDate:string="2000-01-01"
@@ -30,12 +39,12 @@ export class InsightsComponent implements OnInit {
   constructor(private dataService:DataService) { }
   ntomonth = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
   temp:any
-  kwtags:any
+  kwtags:any = [['Youtube', '']]
   updateTags(tags:any){
     this.kwtags = tags;
   }
   sendGroupRequest(groups:any){
-    // this.updateUser("Getting tagged Data");
+    this.updateUser("Getting tagged Data", "info");
     let temp = localStorage.getItem('cleanedData');
     console.log(temp);
     console.log(this.data)
@@ -49,7 +58,9 @@ export class InsightsComponent implements OnInit {
       console.log(data)
       this.presentData(data)
       localStorage.setItem('cleanedData', temp);
-      console.log(localStorage.getItem("cleanedData"))
+      this.updateUser("All Done!", "success")
+      // this.statp.nativeElement.className = "alert alert-success";
+      // console.log(localStorage.getItem("cleanedData"))
     }     
           
     })
@@ -110,13 +121,17 @@ export class InsightsComponent implements OnInit {
       console.log(ans)
       vals[i] = ans;
     }
-    // this.updateUser("Filtering by Time");
+    this.updateUser("Filtering by Time", "info");
     this.dataService.getFilteredData(vals).subscribe(data=>{
       this.data = data
       this.sendGroupRequest(this.kwtags);
+    }, error=>{
+      this.updateUser("Request Failed.", "danger");
     })
   }
   presentData(data:any){
+    this.updateUser("Data Received Successfully. Sketching the Graphs...", "success");
+    // this.statp.nativeElement.className = "alert alert-success";
     let extdates:string[] = data.extDates
     for(let i=0;i<extdates.length;i++){
       let date = extdates[i];
@@ -143,18 +158,17 @@ export class InsightsComponent implements OnInit {
     this.processdaytime(this.daytime)
     this.viewfreqs = data.viewFreq
     this.processviewFreqs(this.viewfreqs)
+    this.updateUser("All Done!", "success");
   }
-  // updateUser(stat:String){
-  // console.log(this.statp.nativeElement)
-    // this.statp.nativeElement.innerHTML = stat;
-  // }
+  updateUser(stat:String, alert:String){
+  console.log(this.statp.nativeElement)
+    this.statp.nativeElement.innerHTML = stat;
+    this.statp.nativeElement.className = "alert alert-" + alert;
+  }
   ngOnInit(): void {
     // this.statp.nativeElement.innerHTML = "stat";
     // this.updateUser("Getting Processed Data");
-      this.dataService.getData().subscribe(data=>{
-        this.presentData(JSON.parse(data));
-      })
-      this.data = localStorage.getItem('cleanedData');
+      
   }
 
 }

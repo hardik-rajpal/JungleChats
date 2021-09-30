@@ -1,6 +1,7 @@
 <p #status> Hi</p>
 <div class="container" #status>
-    <p class="display-3">Insights: </p> 
+    <p class="display-3">Insights: </p>
+     
     <app-timefilters [minDate]="minDate" [maxDate]="maxDate" (getFiltered)="getFilteredData($event)"></app-timefilters>
     <app-kwfilters (groupRequest)="sendGroupRequest($event)" (updateTags)="updateTags($event)"></app-kwfilters>
     <div class="chart container border">
