@@ -100,7 +100,7 @@ getStatus():Observable<any>{
     let d = Date.now()
     let date = this.datepipe.transform(d, 'yyMMdd')?.toString()
     // console.log(date)
-    this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+    this.http.get("https://api.ipify.org/?format=json").subscribe((res:any)=>{
       ip = res.ip
       this.http.get("https://ipapi.co/"+ip+"/json/").subscribe((data:any)=>{
         let datavisit:string;
