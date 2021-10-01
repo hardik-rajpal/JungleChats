@@ -1,5 +1,5 @@
 <div class="snip closed" #snipdiv>
-    <h1 (click) = "toggleSnip()" class="title">Chat #{{id}}</h1>
+    <h1 (click) = "toggleSnip()" class="title">Chat #{{id}}: {{title}}</h1>
     <app-jctxtmsg *ngFor="let msg of msgs;let i = index" [data]="msg"></app-jctxtmsg>
     <div *ngIf="typing">
     <p class="sender mini">

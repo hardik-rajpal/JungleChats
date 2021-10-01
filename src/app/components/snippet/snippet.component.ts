@@ -13,6 +13,7 @@ export class SnippetComponent implements OnInit {
   speed:number = 70;
   forcehide:boolean = true;
   typer:string = "";
+  title!:string
   timeouts:any = [];
   showmsgs:boolean[] = []
   typing:boolean = false;
@@ -73,6 +74,8 @@ export class SnippetComponent implements OnInit {
     const dateRe = /^\d\d/;
     // console.log(snippet)
     let msgs = snippet.snippet.split('\n')
+    // console.log(msgs[0])
+    this.title = msgs[0].split('H#')[1]
     for(let j=msgs.length-1;j>-1;j--){
       // console.log(msgs[j])
       if(!dateRe.test(msgs[j])){
