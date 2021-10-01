@@ -11,7 +11,9 @@ export class SnippetComponent implements OnInit {
   msgs:any[] = []
   tsf:number = 0.3;
   speed:number = 70;
+  forcehide:boolean = true;
   typer:string = "";
+  timeouts:any = [];
   showmsgs:boolean[] = []
   typing:boolean = false;
   id!:number
@@ -23,31 +25,43 @@ export class SnippetComponent implements OnInit {
     'Hardik Rajpal':'The Tiger'
 }
   playSnips(i:number){
+    if(this.forcehide){return;}
     if(i>this.msgs.length-1){
       return;
     }
+    this.timeouts.push(
     setTimeout(()=>{
       let tempsender:string = this.msgs[i].text.split(/\d\d - /)[1].split(': ')[0];
       this.typer = (this.alias as any)[tempsender]
       this.typing = true;
     }, (this.tsf)*this.speed*this.msgs[i].text.length)
-    setTimeout(()=>{
+    )
+    this.timeouts.push(setTimeout(()=>{
       this.typing = false;
     }, (0.99)*this.speed*this.msgs[i].text.length)
-    
+    )
+    this.timeouts.push(
     setTimeout(()=>{
       this.msgs[i].show = true;
       this.playSnips(i+1);
       window.scrollTo(0,100*document.body.scrollHeight);
       
-    }, this.speed*this.msgs[i].text.length)
+    }, this.speed*this.msgs[i].text.length))
   }
-  displaySnip(){
+  toggleSnip(){
     if(this.div.nativeElement.className =="snip"){
       this.div.nativeElement.className = "snip closed";
+      this.forcehide = true;
+      for(let timeout of this.timeouts){
+        clearTimeout(timeout)
+      }
     }
     else{
+      this.forcehide = false;
       this.div.nativeElement.className = "snip";
+      for(let msg of this.msgs){
+        msg.show = false;
+      }
       this.playSnips(0);
     }
 
