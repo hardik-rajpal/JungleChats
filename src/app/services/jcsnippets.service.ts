@@ -14,7 +14,7 @@ const httpOptions = {
 export class JcsnippetsService {
 
   // apiURl = 'http://127.0.0.1:8000/thejungle/snips/';
-  apiURl = 'http://kythr.herokuapp.com/thejungle/snips/';
+  apiURl = 'https://kythr.herokuapp.com/thejungle/snips/';
   
   constructor(private http:HttpClient) { }
   getSnippets():Observable<any>{
