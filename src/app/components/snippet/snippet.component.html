@@ -1,0 +1,10 @@
+<div class="snip closed" #snipdiv>
+    <h1 (click) = "displaySnip()">Chat #{{id}}</h1>
+    <app-jctxtmsg *ngFor="let msg of msgs;let i = index" [data]="msg"></app-jctxtmsg>
+    <div *ngIf="typing">
+    <p class="sender mini">
+        {{typer}}
+        </p>    
+    <img  class="typegif" width = "60" height = "40" src="/assets/images/typing.gif"/>
+</div>
+</div>

@@ -1,0 +1,5 @@
+<div *ngIf="data.show">
+    <p class="sender">{{sender}}</p>
+    <p class="replyto" *ngIf="replyto!=''">{{replyto}}</p>
+    <p class="line" [innerHTML]="content"></p>
+</div>

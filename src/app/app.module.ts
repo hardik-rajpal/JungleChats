@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TimefiltersComponent } from './components/timefilters/timefilters.component';
-import { KwfiltersComponent } from './components/kwfilters/kwfilters.component';
+import {KwfiltersComponent} from './components/kwfilters/kwfilters.component';
 import { HttpClientModule } from '@angular/common/http';
 import {AppRoutingModule} from './app-routing.module'
 import { TagInputModule } from 'ngx-chips';
@@ -18,7 +18,10 @@ import { MylinechartComponent } from './components/mylinechart/mylinechart.compo
 import { ResultspageComponent } from './components/resultspage/resultspage.component';
 import { SubmitpageComponent } from './components/submitpage/submitpage.component';
 import { LandingpageComponent } from './components/landingpage/landingpage.component';
-import { ScatterdaysComponent } from './components/scatterdays/scatterdays.component'
+import { ScatterdaysComponent } from './components/scatterdays/scatterdays.component';
+import { JclandComponent } from './components/jcland/jcland.component';
+import { SnippetComponent } from './components/snippet/snippet.component';
+import { JctxtmsgComponent } from './components/jctxtmsg/jctxtmsg.component'
 // import {For} from '@angular/forms';
 @NgModule({
   declarations: [
@@ -35,6 +38,9 @@ import { ScatterdaysComponent } from './components/scatterdays/scatterdays.compo
     SubmitpageComponent,
     LandingpageComponent,
     ScatterdaysComponent,
+    JclandComponent,
+    SnippetComponent,
+    JctxtmsgComponent,
 
   ],
   imports: [
