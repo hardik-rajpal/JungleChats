@@ -23,6 +23,7 @@ import { JclandComponent } from './components/jcland/jcland.component';
 import { SnippetComponent } from './components/snippet/snippet.component';
 import { JctxtmsgComponent } from './components/jctxtmsg/jctxtmsg.component'
 import  {DatePipe} from '@angular/common';
+import { AboutComponent } from './components/about/about.component';
 // import {For} from '@angular/forms';
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import  {DatePipe} from '@angular/common';
     JclandComponent,
     SnippetComponent,
     JctxtmsgComponent,
+    AboutComponent,
 
   ],
   imports: [

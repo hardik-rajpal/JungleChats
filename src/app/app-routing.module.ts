@@ -2,13 +2,15 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {ResultspageComponent} from '../../src/app/components/resultspage/resultspage.component'
 import {SubmitpageComponent} from '../../src/app/components/submitpage/submitpage.component'
+import { AboutComponent } from './components/about/about.component';
 import { JclandComponent } from './components/jcland/jcland.component';
 import { LandingpageComponent } from './components/landingpage/landingpage.component';
 const routes:Routes = [
     {path:'', component:LandingpageComponent},
     {path:'submitfile', component:SubmitpageComponent},
     {path:'results', component:ResultspageComponent},
-    {path:'thejungle', component:JclandComponent}
+    {path:'thejungle', component:JclandComponent},
+    {path:'about', component:AboutComponent}
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
