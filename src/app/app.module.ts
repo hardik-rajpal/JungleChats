@@ -22,6 +22,7 @@ import { ScatterdaysComponent } from './components/scatterdays/scatterdays.compo
 import { JclandComponent } from './components/jcland/jcland.component';
 import { SnippetComponent } from './components/snippet/snippet.component';
 import { JctxtmsgComponent } from './components/jctxtmsg/jctxtmsg.component'
+import  {DatePipe} from '@angular/common';
 // import {For} from '@angular/forms';
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { JctxtmsgComponent } from './components/jctxtmsg/jctxtmsg.component'
     NgxChartsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

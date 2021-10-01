@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 // import {Task} from '../Task';
 import { Observable} from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-
+import { isThisTypeNode } from 'typescript';
+import { DatePipe } from '@angular/common';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,8 +22,10 @@ export class DataService {
   userId!:string;
   // private apiUrl = "http://127.0.0.1:8000/kytube/data/"
   private apiUrl = "https://kythr.herokuapp.com/kytube/data/"
+  // private trackerApi = "http://127.0.0.1:8000/viewtracker/"
+  private trackerApi = "https://kythr.herokuapp.com/viewtracker/"
   
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private datepipe:DatePipe) { }
   getFilteredData(vals:string[]):Observable<any>{
     let cd = localStorage.getItem('cleanedData')
     let id = localStorage.getItem('userId')
@@ -91,5 +94,35 @@ getStatus():Observable<any>{
       console.log('cd not found')
     }
     return this.http.post<any>(this.apiUrl, httpOptions)
+  }
+  sendVisitorData(site:string){
+    let ip = ""
+    let d = Date.now()
+    let date = this.datepipe.transform(d, 'yyMMdd')?.toString()
+    // console.log(date)
+    this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+      ip = res.ip
+      this.http.get("https://ipapi.co/"+ip+"/json/").subscribe((data:any)=>{
+        let datavisit:string;
+        // data = JSON.parse(data)
+        datavisit = data.ip+","+data.city + "," + data.country + ',' + date + ',' + site;
+        // console.log(datavisit)
+        let httpop = {
+            params:new HttpParams().set('title', 'Senduserdata').append('visitor', datavisit)
+          }
+          this.http.post(this.trackerApi, httpop).subscribe(data=>{}, err=>{});
+        },err=>{
+          let datavisit = ip + ",Ungot,ungot," + date
+          
+          let httpop = {
+            params:new HttpParams().set('title', 'Senduserdata').append('visitor', datavisit)
+          }
+          this.http.post(this.trackerApi, httpop).subscribe(data=>{}, err=>{})
+        })
+    }, err=>{
+
+    })
+
+
   }
 }

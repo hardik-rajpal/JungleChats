@@ -1,4 +1,5 @@
 <p class="display-4">Welcome to Jungle Chats!</p>
+<p class="alert alert-info" *ngIf="waiting">Collecting Chats from Server</p>
 <div *ngFor="let snip of snippets">
     <app-snippet [data]="snip"></app-snippet>
 </div>

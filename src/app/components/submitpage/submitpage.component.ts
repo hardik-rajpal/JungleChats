@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 // import {FileReader} from '@angular/forms/'
 import { DataService } from '../../services/dynamic.service';
 import {Router, ActivatedRoute} from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-submitpage',
   templateUrl: './submitpage.component.html',
@@ -148,6 +149,9 @@ export class SubmitpageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // let data = "Gi";
+    // let ipAddress = '';
+    this.dataservice.sendVisitorData("kyt");
   }
 
 }
