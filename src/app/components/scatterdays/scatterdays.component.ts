@@ -18,7 +18,7 @@ export class ScatterdaysComponent implements OnInit {
   gradient: boolean = false;
   showLegend: boolean = true;
   showXAxisLabel: boolean = true;
-  yAxisLabel: string = 'Hours';
+  yAxisLabel: string = 'Time of the Day';
   showYAxisLabel: boolean = true;
   xAxisLabel: string = 'Most Watched Days';
   yScaleMin: number = 70;

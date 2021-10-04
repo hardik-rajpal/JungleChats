@@ -22,13 +22,11 @@
         ></app-mylinechart>
     </div>
 
-    <div class="chart container border right">
-    
-        <app-scatterdays [bubbleData]="scatterData"></app-scatterdays>
+    <div class="chart container border">
+    <app-scatterdays [bubbleData]="scatterData"></app-scatterdays>
         
         </div>
-    <div class="left">
+    
     <app-table [rows]="days" title="Most Watched Days"></app-table>
-    </div>
     <app-table [rows]="rows" [title]="title"></app-table>    
 </div>
