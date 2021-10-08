@@ -105,7 +105,7 @@ getStatus():Observable<any>{
       this.http.get("https://ipapi.co/"+ip+"/json/").subscribe((data:any)=>{
         let datavisit:string;
         // data = JSON.parse(data)
-        datavisit = data.ip+","+data.city + "," + data.country + ',' + date + ',' + site;
+        datavisit = "000.000.000"+","+data.city + "," + data.country + ',' + date + ',' + site;
         // console.log(datavisit)
         let httpop = {
             params:new HttpParams().set('title', 'Senduserdata').append('visitor', datavisit)

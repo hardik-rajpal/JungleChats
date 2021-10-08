@@ -83,6 +83,7 @@ export class InsightsComponent implements AfterViewInit,OnInit {
     return (Math.floor(time)).toString() + ":" + (60*(time - Math.floor(time))).toString()
   }
   processmostWatchedDays(data:any){
+    this.days = [];
     this.days.push(['Rank', 'Date', 'Number of Videos'])
     for(let k=0;k<data.hours.length;k++){
       this.days.push([k+1, data.days[k][0], data.days[k][1]]);
