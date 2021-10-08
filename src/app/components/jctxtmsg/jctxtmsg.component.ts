@@ -31,7 +31,7 @@ export class JctxtmsgComponent implements OnInit {
     let replyto = ""
     if(forwardRe.test(line)){
       forwarded = true;
-      line = '<p class="forward" #forward style="margin:0px;font-weight: bold;color: grey;font-style: italic;font-family: sans-serif;">&#8667 Forwarded</p>'  + line.split(forwardRe)[1]
+      line = line.split(forwardRe)[1]
     }
     if(replytoRe.test(line)){
       replyto = line.match(replytoRe)![0]
@@ -41,6 +41,9 @@ export class JctxtmsgComponent implements OnInit {
     this.content = line
     this.sender = sender;
     this.forwarded = forwarded;
+    if(this.forwarded){
+      console.log(this.forwarded)
+    }
     this.replyto = replyto; 
   }
   ngOnInit(): void {

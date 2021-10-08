@@ -41,12 +41,19 @@ export class SnippetComponent implements OnInit {
       this.typing = false;
     }, (0.99)*this.speed*this.msgs[i].text.length)
     )
+    let scroller = ()=>{
+      if(this.forcehide){return;}
+      this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
+      this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
+      this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
+      setTimeout(scroller, 300)
+    }
+    setTimeout(scroller, 300)
     this.timeouts.push(
+    
     setTimeout(()=>{
       this.msgs[i].show = true;
-      this.playSnips(i+1);
-      window.scrollTo(0,100*document.body.scrollHeight);
-      
+      this.playSnips(i+1);      
     }, this.speed*this.msgs[i].text.length))
   }
   toggleSnip(){

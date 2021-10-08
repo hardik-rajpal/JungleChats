@@ -1,0 +1,18 @@
+.mainsnips{
+    width:600px;
+    margin:auto;
+}
+/* .bodymain{
+    background-color:#ff0000;
+    height:100%;
+} */
+:host{
+    background: #fafafa;
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+    z-index: 100;
+}

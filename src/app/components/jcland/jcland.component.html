@@ -1,5 +1,7 @@
+<div class="bodymain">
 <p class="display-4">Welcome to Jungle Chats!</p>
 <p class="alert alert-info" *ngIf="waiting">Collecting Chats from Server</p>
-<div *ngFor="let snip of snippets" style="justify-self: center;">
-    <app-snippet [data]="snip"></app-snippet>
+<div class="mainsnips">
+    <app-snippet *ngFor="let snip of snippets" [data]="snip"></app-snippet>
+</div>
 </div>

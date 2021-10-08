@@ -5,6 +5,8 @@
     border-radius: 20px;
     margin:20px;
     width:600px;
+    height:600px;
+    overflow-y: hidden;
 }
 .snip.closed{
     height: 58px;
