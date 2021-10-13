@@ -1,7 +1,13 @@
 <div class="bodymain">
-<p class="display-4">Welcome to Jungle Chats!</p>
+<div class="pagetitle">
+    <p class="display-4">Welcome to Jungle Chats!</p>
+</div>
 <p class="alert alert-info" *ngIf="waiting">Collecting Chats from Server</p>
 <div class="mainsnips">
     <app-snippet *ngFor="let snip of snippets" [data]="snip"></app-snippet>
+</div>
+<div class="footer">
+    <p><i class="fa fa-copyright"></i> 2021 Jungle Chats, Hardik Rajpal. All rights reserved. <a href="/about" class="about">About</a></p>
+    
 </div>
 </div>

@@ -16,3 +16,17 @@
     overflow-y: scroll;
     z-index: 100;
 }
+.pagetitle{
+    width: fit-content;
+    margin:auto; 
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    left: 30%;
+    width:fit-content;
+    margin: auto;
+}
+.about{
+    margin-left: 30px;
+}
