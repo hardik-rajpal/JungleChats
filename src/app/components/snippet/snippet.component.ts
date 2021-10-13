@@ -10,8 +10,9 @@ export class SnippetComponent implements OnInit {
   @ViewChild('snipdiv') div!:ElementRef;
   msgs:any[] = []
   tsf:number = 0.3;
-  speed:number = 70;
+  speed:number = 10;
   forcehide:boolean = true;
+  keepscroll:boolean = true;
   typer:string = "";
   title!:string
   timeouts:any = [];
@@ -28,8 +29,10 @@ export class SnippetComponent implements OnInit {
   playSnips(i:number){
     if(this.forcehide){return;}
     if(i>this.msgs.length-1){
+      this.keepscroll = false;
       return;
     }
+    this.keepscroll = true;
     this.timeouts.push(
     setTimeout(()=>{
       let tempsender:string = this.msgs[i].text.split(/\d\d - /)[1].split(': ')[0];
@@ -46,15 +49,20 @@ export class SnippetComponent implements OnInit {
       this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
       this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
       this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
-      setTimeout(scroller, 300)
+      if(this.keepscroll){
+        setTimeout(scroller, 300);
+      }
+
     }
-    setTimeout(scroller, 300)
     this.timeouts.push(
     
     setTimeout(()=>{
       this.msgs[i].show = true;
       this.playSnips(i+1);      
     }, this.speed*this.msgs[i].text.length))
+    this.timeouts.push(
+      setTimeout(scroller, 300)
+    )
   }
   toggleSnip(){
     if(this.div.nativeElement.className =="snip"){

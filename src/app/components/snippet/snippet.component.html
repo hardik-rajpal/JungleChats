@@ -1,10 +1,13 @@
-<div class="snip closed" #snipdiv>
-    <h1 (click) = "toggleSnip()" class="title">Chat #{{id}}: {{title}}</h1>
-    <app-jctxtmsg *ngFor="let msg of msgs;let i = index" [data]="msg"></app-jctxtmsg>
-    <div *ngIf="typing">
-    <p class="sender mini">
-        {{typer}}
-        </p>    
-    <img  class="typegif" width = "60" height = "40" src="/assets/images/typing.gif"/>
+<!--  <button>|||></button><button>autoscroll</button> -->
+<div class="holder">
+    <h2 (click) = "toggleSnip()" class="title">Chat #{{id}}: {{title}} </h2>
+        <div class="snip closed" #snipdiv>
+        <app-jctxtmsg *ngFor="let msg of msgs;let i = index" [data]="msg"></app-jctxtmsg>
+        <div *ngIf="typing">
+        <p class="sender mini">
+            {{typer}}
+            </p>    
+        <img  class="typegif" width = "60" height = "40" src="/assets/images/typing.gif"/>
+        </div>
 </div>
 </div>

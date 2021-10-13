@@ -1,21 +1,29 @@
 
 .snip{
     
+    width:600px;
+    height:600px;
+    overflow-y: scroll;
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+}
+.snip::-webkit-scrollbar{ width: 0 !important}
+
+.snip.closed{
+    height: 0px;
+    overflow: hidden;
+}
+.holder{
     border: 4px solid black;
     border-radius: 20px;
     margin:20px;
-    width:600px;
-    height:600px;
-    overflow-y: hidden;
+
 }
-.snip.closed{
-    height: 58px;
-    overflow: hidden;
-}
-.snip > h1{
+.title{
     background-color:burlywood;
     border-radius: 15px;
     height: auto;
+    margin-bottom: 0;
 }
 .sender.mini{
     border-radius: 5px;
