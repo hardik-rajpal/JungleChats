@@ -12,6 +12,7 @@ export class JctxtmsgComponent implements OnInit {
   replyto!:String;
   forwarded!:Boolean;
   sender!:String;
+  senderclass!:String;
   alias:any = {
     'Sourish Wockrell':'The Bear',
     'Srikar rockwell New':'The Deer',
@@ -40,6 +41,7 @@ export class JctxtmsgComponent implements OnInit {
     }
     this.content = line
     this.sender = sender;
+    this.senderclass = "sender "+sender.split(' ')[1].toLowerCase();
     this.forwarded = forwarded;
     if(this.forwarded){
       console.log(this.forwarded)

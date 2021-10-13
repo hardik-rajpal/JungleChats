@@ -1,13 +1,27 @@
 <!--  <button>|||></button><button>autoscroll</button> -->
+
 <div class="holder">
-    <h2 (click) = "toggleSnip()" class="title">Chat #{{id}}: {{title}} </h2>
-        <div class="snip closed" #snipdiv>
+    <div class="title">
+        <h2 (click) = "toggleSnip()" style="float:left;">Chat #{{id}}: {{title}}
+            
+        </h2>
+        <button #playpause (click)="togglePlay()" style="float:right;margin:10px;">
+            <i *ngIf="!paused" class="fa fa-pause"></i>
+            <i *ngIf ="paused" class="fa fa-play"></i>
+        </button>
+        <button #autoscroll (click)="toggleScroll()" style="float:right;margin:10px;">
+            <i *ngIf="keepscroll" class="fa fa-arrow-down"></i>
+            <i *ngIf ="!keepscroll" class="fa fa-mouse"></i>
+        </button> 
+    </div>
+    <div class="snip closed" #snipdiv>
         <app-jctxtmsg *ngFor="let msg of msgs;let i = index" [data]="msg"></app-jctxtmsg>
-        <div *ngIf="typing">
-        <p class="sender mini">
-            {{typer}}
-            </p>    
-        <img  class="typegif" width = "60" height = "40" src="/assets/images/typing.gif"/>
-        </div>
-</div>
+            <div *ngIf="typing">
+            <p class="{{typerclass}}">
+                {{typer}}
+                </p>    
+            <img  class="typegif" width = "60" height = "40" src="/assets/images/typing.gif"/>
+            </div>
+        <h2 *ngIf="end" class="end"><em>Fin</em></h2>
+    </div>
 </div>

@@ -13,7 +13,10 @@ export class SnippetComponent implements OnInit {
   speed:number = 10;
   forcehide:boolean = true;
   keepscroll:boolean = true;
+  paused:boolean = true;
+  end:boolean = false;
   typer:string = "";
+  typerclass:String = "";
   title!:string
   timeouts:any = [];
   showmsgs:boolean[] = []
@@ -26,17 +29,41 @@ export class SnippetComponent implements OnInit {
     '+1 (385) 296-8922':'The Koala',
     'Hardik Rajpal':'The Tiger'
 }
-  playSnips(i:number){
+
+  scroller(){
     if(this.forcehide){return;}
-    if(i>this.msgs.length-1){
-      this.keepscroll = false;
+    if(!this.keepscroll){return;}
+    this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
+    this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
+    this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
+    console.log("scrolled");
+    if(this.keepscroll){
+      setTimeout(this.scroller, 300);
+    }}
+  playSnips(i:number){
+    if(this.paused){
+      window.setTimeout(()=>{this.playSnips(i)}, 1000)
       return;
     }
-    this.keepscroll = true;
+    if(this.forcehide){return;}
+    if(i>this.msgs.length-1){
+      this.end = true;
+      console.log("Ended");
+      
+      setTimeout(() => {
+        this.scroller();
+        this.keepscroll = false;
+        this.paused = true;
+      }, 300);
+      
+      return;
+    }
+    // this.keepscroll = true;
     this.timeouts.push(
     setTimeout(()=>{
       let tempsender:string = this.msgs[i].text.split(/\d\d - /)[1].split(': ')[0];
       this.typer = (this.alias as any)[tempsender]
+      this.typerclass = "sender mini " + this.typer.toLowerCase();
       this.typing = true;
     }, (this.tsf)*this.speed*this.msgs[i].text.length)
     )
@@ -44,25 +71,26 @@ export class SnippetComponent implements OnInit {
       this.typing = false;
     }, (0.99)*this.speed*this.msgs[i].text.length)
     )
-    let scroller = ()=>{
-      if(this.forcehide){return;}
-      this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
-      this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
-      this.div.nativeElement.scrollTo(0,this.div.nativeElement.scrollHeight);
-      if(this.keepscroll){
-        setTimeout(scroller, 300);
-      }
-
-    }
-    this.timeouts.push(
     
+
+    
+    this.timeouts.push(
     setTimeout(()=>{
       this.msgs[i].show = true;
       this.playSnips(i+1);      
     }, this.speed*this.msgs[i].text.length))
     this.timeouts.push(
-      setTimeout(scroller, 300)
-    )
+        setTimeout(()=>{this.scroller()}, 300)
+      )
+
+  }
+  togglePlay(){
+    this.paused = !this.paused;
+    // this.keepscroll = !this.keepscroll;
+  }
+  toggleScroll(){
+    // this.paused = !this.paused;
+    this.keepscroll = !this.keepscroll;
   }
   toggleSnip(){
     if(this.div.nativeElement.className =="snip"){
@@ -74,6 +102,9 @@ export class SnippetComponent implements OnInit {
     }
     else{
       this.forcehide = false;
+      this.paused = false;
+      this.end = false;
+      this.keepscroll = true;
       this.div.nativeElement.className = "snip";
       for(let msg of this.msgs){
         msg.show = false;

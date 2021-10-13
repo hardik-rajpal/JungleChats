@@ -22,7 +22,7 @@
 .title{
     background-color:burlywood;
     border-radius: 15px;
-    height: auto;
+    height: 50px;
     margin-bottom: 0;
 }
 .sender.mini{
@@ -32,8 +32,24 @@
     margin: 10px;
     font-weight: bold;
     width: fit-content;
-    background-color: lightsalmon;
+}
+.deer{
+    background-color: yellow;
+}
+.koala{
+    background-color: violet;
+}
+.bear{
+    background-color: #FF5733;
+}
+.tiger{
+    background-color: goldenrod;
 }
 .typegif{
     margin-left: 50px;
+}
+.end{
+    width: 100px;
+    margin:auto;
+    margin-bottom: 10px;
 }

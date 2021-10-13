@@ -16,17 +16,32 @@
     margin-bottom: 0px;
     font-weight: bold;
     width: fit-content;
-    background-color: lightsalmon;
+}
+.deer{
+    background-color: yellow;
+}
+.koala{
+    background-color: violet;
+}
+.bear{
+    background-color: #FF5733;
+}
+.tiger{
+    background-color: goldenrod;
 }
 
 .line{
     padding:10px;
+    padding-bottom: 10px;
     margin-bottom:10px;
     max-width: 400px;
     width:fit-content;
     border-radius: 10px;
     border-top-left-radius: 0px;
     background-color: aquamarine;
+}
+.linep{
+    margin: 0px;
 }
 .forward{
     margin:0px;
