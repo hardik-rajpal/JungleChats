@@ -1,0 +1,41 @@
+.mainsnips{
+    /* width:600px; */
+    padding-bottom: 200px;
+    display: grid;
+    gap: 10px;
+    grid-template: repeat(4,1fr)/repeat(3,1fr);
+    grid-auto-flow: row dense;
+    overflow-x: scroll;
+}
+.bodymain{
+    width: auto;
+    background-color: white;
+    margin: 20px ;
+    padding: 20px;
+    border-radius: 10px;
+}
+#header{
+    font-family: 'Patua One', Verdana;
+    color: rgb(0, 90, 0);
+}
+:host{
+    background: #f0f0f0;
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+    z-index: 100;
+}
+.pagetitle{
+    width: fit-content;
+    margin:auto; 
+}
+.footer{
+    /* position: absolute; */
+    /* bottom: 0; */
+    /* width:fit-content; */
+    text-align: center;
+    margin: auto;
+}

@@ -1,0 +1,22 @@
+<div class="wholequote">
+    <p class="{{quoteClass}}" innerHtml="{{quote.text}}"></p>
+    <p class="{{creditsClass}}"> - {{quote.author}}, {{quote.date}}</p>
+    <div style="display:flex;flex-direction: row;justify-content: center;">
+        <div>
+        <Button id="tweetBtn"class="btn btn-light btn-sm opt2">
+            <ngx-twitter-share
+            [url]="'https://junglechats.herokuapp.com/quotes'"
+            [options]="shareOptions" >
+          </ngx-twitter-share>
+        </Button>
+        </div>
+        <div>
+        <Button (click)="likeQuote()" class="btn btn-light btn-sm opt">
+        <i *ngIf="likedQuote&&(!waiting)" class="fa fa-heart" style="color:red"></i>
+        <i *ngIf="!likedQuote&&(!waiting)" class="fa fa-heart-o" style="color:grey" ></i>
+        <i *ngIf="waiting" class="fa fa-clock-o" style="color:grey" ></i>
+        {{quote.numLikes}}
+        </Button>
+        </div>
+    </div>
+</div>
