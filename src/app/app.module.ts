@@ -14,7 +14,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { QuotesPageComponent } from './pages/quotespage/quotespage.component';
 import { QuoteComponent } from './components/quote/quote.component';
 // import {For} from '@angular/forms';
-import { NgxTwitterWidgetsModule } from 'ngx-twitter-widgets';
+// import { NgxTwitterWidgetsModule } from 'ngx-twitter-widgets';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +34,7 @@ import { NgxTwitterWidgetsModule } from 'ngx-twitter-widgets';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgxTwitterWidgetsModule
+    // NgxTwitterWidgetsModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
