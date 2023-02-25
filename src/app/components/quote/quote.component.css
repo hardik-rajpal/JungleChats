@@ -8,7 +8,7 @@
     /* margin: ; */
 }
 .q1{
-    background-image:url('JungleChats/assets/images/quotebox1.svg');
+    background-image:url('/assets/images/quotebox1.svg');
     width: 200px;
     height: 175px;
     padding: 30px;
@@ -18,7 +18,7 @@
     margin-left: 140px;
 }
 .q2{
-    background-image:url('JungleChats/assets/images/quotebox2.svg');
+    background-image:url('/assets/images/quotebox2.svg');
     width: 320px;
     height: 280px;
     padding: 50px;
@@ -29,7 +29,7 @@
     margin-left: 140px;
 }
 .q3{
-    background-image:url('JungleChats/assets/images/quotebox4.svg');
+    background-image:url('/assets/images/quotebox4.svg');
     width: 250px;
     height: 175px;
     padding: 30px;
@@ -40,7 +40,7 @@
     margin-left: 110px;
 }
 .q0{
-    background-image:url('JungleChats/assets/images/quotebox5.svg');
+    background-image:url('/assets/images/quotebox5.svg');
     width: 200px;
     height: 175px;
     padding: 20px;
