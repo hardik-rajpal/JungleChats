@@ -5,7 +5,7 @@
 <div class="pagetitle">
     <h1 class="display-4" id="header">Welcome to Jungle Chats!</h1>
 </div>
-<a href="/quotes" style="color: rgb(0, 90, 0);">Check out the QuoteWall!</a>
+<a [routerLink]="['/quotes']" style="color: rgb(0, 90, 0);">Check out the QuoteWall!</a>
 <hr>
 <br>
 <p class="alert alert-info" *ngIf="waiting">Collecting Chats from Server</p>
@@ -14,7 +14,7 @@
 </div>
 <br>
 <div class="footer">
-    <p><i class="fa fa-copyright"></i> 2021 Jungle Chats. All rights reserved. <a href="/about" style="color: rgb(0, 90, 0);">About</a></p>
+    <p><i class="fa fa-copyright"></i> 2021 Jungle Chats. All rights reserved. <a [routerLink]="['/about']" style="color: rgb(0, 90, 0);">About</a></p>
 </div>
 
 </div>
