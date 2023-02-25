@@ -1,9 +1,0 @@
-<div class="msg" *ngIf="data.show">
-    <p class="{{senderclass}}">{{sender}}</p>
-    <p class="replyto" *ngIf="replyto!=''">Replying to <i>{{replyto}}</i></p>
-    <div class="line" >
-    <p *ngIf="forwarded" class="forward">&#8608; Forwarded</p>
-    <p [innerHTML]="content" class="linep">
-    </p>
-    </div>
-</div>
