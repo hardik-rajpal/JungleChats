@@ -21,9 +21,9 @@ export class DataService {
   data:any;
   userId!:string;
   // private apiUrl = "http://127.0.0.1:8000/kytube/data/"
-  private apiUrl = "https://kythr.herokuapp.com/kytube/data/"
+  private apiUrl = "https://kyt.hardikrajpal.repl.co/kytube/data/"
   // private trackerApi = "http://127.0.0.1:8000/viewtracker/"
-  private trackerApi = "https://kythr.herokuapp.com/viewtracker/"
+  private trackerApi = "https://kyt.hardikrajpal.repl.co/viewtracker/"
   
   constructor(private http:HttpClient, private datepipe:DatePipe) { }
   
