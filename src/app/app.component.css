@@ -7,7 +7,7 @@ body
     border-radius: 10px;
 }
 :host{
-    background-image: url('/assets/images/jungle-bg.jpg');
+    background-image: url('JungleChats/assets/images/jungle-bg.jpg');
     position: fixed;
     width: 100vw;
     height: 100vh;
